@@ -1,11 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:local_database_testing_hive/QuickTask.dart';
-import 'package:local_database_testing_hive/splash_screen.dart';
-import 'package:timezone/data/latest.dart' as tz;
+import 'package:quick_task_app/model/QuickTask.dart';
+import 'package:quick_task_app/screen/splash_screen.dart';
 
-import 'service/notification.dart';
 
 
 Box? box;
@@ -15,9 +13,9 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(QuickTaskAdapter());
   await Hive.openBox('QuickTaskBox');
- tz.initializeTimeZones();
 
-  NotificationService().initNotification();
+
+
 
   runApp(const QuickTaskApp());
 }

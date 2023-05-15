@@ -2,8 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:local_database_testing_hive/QuickTask.dart';
-import 'package:local_database_testing_hive/home_screen.dart';
+import 'package:quick_task_app/QuickTask.dart';
+import 'package:quick_task_app/home_screen.dart';
+
 
 class UpdateScreen extends StatefulWidget {
   final int index;

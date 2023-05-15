@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'QuickTask.dart';
+part of 'model/QuickTask.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator

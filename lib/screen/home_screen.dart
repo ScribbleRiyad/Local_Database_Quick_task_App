@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:local_database_testing_hive/QuickTask.dart';
-import 'package:timezone/data/latest.dart' as tz;
-import 'package:local_database_testing_hive/update_screen.dart';
+import 'package:quick_task_app/model/QuickTask.dart';
 
-import 'service/notification.dart';
+import 'package:quick_task_app/screen/update_screen.dart';
+
 
 DateTime scheduleTime = DateTime.now();
 class HomeScreen extends StatefulWidget {
@@ -24,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-     tz.initializeTimeZones();
+
     dataBox = Hive.box('QuickTaskBox');
     
   }
@@ -72,42 +70,37 @@ class _HomeScreenState extends State<HomeScreen> {
                 return Padding(
                   padding: const EdgeInsets.only(
                       left: 8.00, right: 8.00, top: 5.00, bottom: 5.00),
-                  child: Column(
-                    children: [
-                   DatePickerTxt(),
-            ScheduleBtn(), Card(
-                        color: Colors.yellowAccent,
-                        elevation: 5,
-                        child: ListTile(
-                          leading: IconButton(
-                            onPressed: () {
-                        
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => UpdateScreen(
-                                    index: index,
-                                    data: getData,
-                                    titleController: getData.tasktitle,
-                                    descriptionController: getData.taskdetails,
-                                  ),
-                                ),
-                              );
-                            },
-                            icon: const Icon(Icons.edit),
-                          ),
-                          title: Text(getData.tasktitle),
-                          subtitle: Text(getData.taskdetails),
-                          trailing: IconButton(
-                            onPressed: () {
-                              deleteData(index);
-                            },
-                            icon: const Icon(Icons.delete),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: Card(
+                       color: Colors.yellowAccent,
+                       elevation: 5,
+                       child: ListTile(
+                         leading: IconButton(
+                           onPressed: () {
+                       
+                             Navigator.push(
+                               context,
+                               MaterialPageRoute(
+                                 builder: (context) => UpdateScreen(
+                                   index: index,
+                                   data: getData,
+                                   titleController: getData.tasktitle,
+                                   descriptionController: getData.taskdetails,
+                                 ),
+                               ),
+                             );
+                           },
+                           icon: const Icon(Icons.edit),
+                         ),
+                         title: Text(getData.tasktitle),
+                         subtitle: Text(getData.taskdetails),
+                         trailing: IconButton(
+                           onPressed: () {
+                             deleteData(index);
+                           },
+                           icon: const Icon(Icons.delete),
+                         ),
+                       ),
+                     ),
                 );
               },
             );
@@ -177,53 +170,5 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         });
-  }
-}
-class DatePickerTxt extends StatefulWidget {
-  const DatePickerTxt({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<DatePickerTxt> createState() => _DatePickerTxtState();
-}
-
-class _DatePickerTxtState extends State<DatePickerTxt> {
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        DatePicker.showDateTimePicker(
-          context,
-          showTitleActions: true,
-          onChanged: (date) => scheduleTime = date,
-          onConfirm: (date) {},
-        );
-      },
-      child: const Text(
-        'Select Date Time',
-        style: TextStyle(color: Colors.blue),
-      ),
-    );
-  }
-}
-
-class ScheduleBtn extends StatelessWidget {
-  const ScheduleBtn({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      child: const Text('Schedule notifications'),
-      onPressed: () {
-        debugPrint('Notification Scheduled for $scheduleTime');
-        NotificationService().scheduleNotification(
-            title: 'Scheduled Notification',
-            body: '$scheduleTime',
-            scheduledNotificationDateTime: scheduleTime);
-      },
-    );
   }
 }
