@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:quick_task_app/QuickTask.dart';
-import 'package:quick_task_app/home_screen.dart';
+import 'package:quick_task_app/screen/home_screen.dart';
 
 
 class UpdateScreen extends StatefulWidget {

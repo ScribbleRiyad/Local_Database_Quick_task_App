@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.quick_task_app">
    <application
-        android:label="quick_task_app"
+        android:label="Quick Task"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

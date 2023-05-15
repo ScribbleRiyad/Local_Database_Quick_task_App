@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:quick_task_app/model/QuickTask.dart';
+import 'package:quick_task_app/QuickTask.dart';
 import 'package:quick_task_app/screen/splash_screen.dart';
 
 

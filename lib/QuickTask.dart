@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:hive/hive.dart';
-part '../QuickTask.g.dart';
+part 'QuickTask.g.dart';
 
 @HiveType(typeId: 1)
 class QuickTask {
