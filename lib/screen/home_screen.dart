@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.only(
                       left: 8.00, right: 8.00, top: 5.00, bottom: 5.00),
                   child: Card(
-                       color: Colors.yellowAccent,
+                       color: Colors.lightBlueAccent,
                        elevation: 5,
                        child: ListTile(
                          leading: IconButton(

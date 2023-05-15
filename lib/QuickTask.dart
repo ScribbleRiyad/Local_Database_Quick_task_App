@@ -10,7 +10,8 @@ class QuickTask {
       this.taskNo,
       this.tasktitle,
       this.taskdetails,
-      this.taskcreatedAt});
+      this.taskcreatedAtdate,
+      this.taskcreatedAttime});
   @HiveField(0)
   int? id;
   @HiveField(1)
@@ -20,5 +21,7 @@ class QuickTask {
   @HiveField(3)
   String? taskdetails;
   @HiveField(4)
-  String? taskcreatedAt;
+  String? taskcreatedAtdate;
+    @HiveField(5)
+  String? taskcreatedAttime;
 }
