@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+
 import 'package:quick_task_app/QuickTask.dart';
 
 import 'package:quick_task_app/screen/update_screen.dart';
@@ -15,13 +16,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late final Box dataBox;
-
+  final TextEditingController tasktimeinput = TextEditingController(); 
   final TextEditingController taskController = TextEditingController();
   final TextEditingController taskDetailsController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    tasktimeinput.text = "";
 
     dataBox = Hive.box('QuickTaskBox');
     
@@ -35,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
     QuickTask newData = QuickTask(
       tasktitle: taskController.text,
       taskdetails: taskDetailsController.text,
+   
     );
 
     dataBox.add(newData);
@@ -66,41 +69,51 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (context, index) {
                 var box = value;
                 var getData = box.getAt(index);
+               
 
-                return Padding(
-                  padding: const EdgeInsets.only(
-                      left: 8.00, right: 8.00, top: 5.00, bottom: 5.00),
-                  child: Card(
-                       color: Colors.lightBlueAccent,
-                       elevation: 5,
-                       child: ListTile(
-                         leading: IconButton(
-                           onPressed: () {
-                       
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(
-                                 builder: (context) => UpdateScreen(
-                                   index: index,
-                                   data: getData,
-                                   titleController: getData.tasktitle,
-                                   descriptionController: getData.taskdetails,
+                return GestureDetector(
+                  onTap: () {
+                      Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                   builder: (context) => UpdateScreen(
+                                     index: index,
+                                     data: getData,
+                                     titleController: getData.tasktitle,
+                                     descriptionController: getData.taskdetails,
+                                
+                                     
+                                   ),
                                  ),
+                               );
+                    
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 8.00, right: 8.00, top: 5.00, bottom: 5.00),
+                    child: Card(
+                         color: Colors.lightBlueAccent,
+                         elevation: 5,
+                         child: ListTile(
+                           leading:  CircleAvatar(
+                            child: Text("${index+1} "),
+                           ),
+                           title: Text(getData.tasktitle),
+                           subtitle: Text(getData.taskdetails),
+                           trailing: Column(
+                             children: [
+                               IconButton(
+                                 onPressed: () {
+                                   deleteData(index);
+                                 },
+                                 icon: const Icon(Icons.delete),
                                ),
-                             );
-                           },
-                           icon: const Icon(Icons.edit),
-                         ),
-                         title: Text(getData.tasktitle),
-                         subtitle: Text(getData.taskdetails),
-                         trailing: IconButton(
-                           onPressed: () {
-                             deleteData(index);
-                           },
-                           icon: const Icon(Icons.delete),
+                          
+                             ],
+                           ),
                          ),
                        ),
-                     ),
+                  ),
                 );
               },
             );
@@ -152,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                ElevatedButton(
+   ElevatedButton(
                     onPressed: () {
                       createData();
                 

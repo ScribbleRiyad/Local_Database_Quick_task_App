@@ -21,14 +21,15 @@ class QuickTaskAdapter extends TypeAdapter<QuickTask> {
       taskNo: fields[1] as int?,
       tasktitle: fields[2] as String?,
       taskdetails: fields[3] as String?,
-      taskcreatedAt: fields[4] as String?,
+      taskcreatedAtdate: fields[4] as String?,
+      taskcreatedAttime: fields[5] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, QuickTask obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class QuickTaskAdapter extends TypeAdapter<QuickTask> {
       ..writeByte(3)
       ..write(obj.taskdetails)
       ..writeByte(4)
-      ..write(obj.taskcreatedAt);
+      ..write(obj.taskcreatedAtdate)
+      ..writeByte(5)
+      ..write(obj.taskcreatedAttime);
   }
 
   @override
